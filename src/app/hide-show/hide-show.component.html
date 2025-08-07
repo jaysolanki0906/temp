@@ -1,0 +1,78 @@
+<!-- app.component.html -->
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1>SHOW / HIDE & REORDER SECTIONS</h1>
+  </div>
+  
+  <!-- Room List Container -->
+  <div class="room-list">
+    <div class="room-container" 
+         cdkDropList 
+         (cdkDropListDropped)="onDrop($event)">
+      
+      <!-- Room Items -->
+      <div *ngFor="let room of roomSections;" 
+           class="room-item"
+           [class.hidden]="!room.isVisible"
+           (click)="toggleRoomVisibility(room)"
+           cdkDrag>
+        
+        <div class="room-content">
+          <!-- Eye Icon -->
+          <svg class="eye-icon" 
+               [class.eye-hidden]="!room.isVisible"
+               fill="none" 
+               stroke="currentColor" 
+               viewBox="0 0 24 24">
+            <path stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+          
+          <!-- Room Name -->
+          <span class="room-name">{{ room.name }}</span>
+        </div>
+        
+        <!-- Drag Handle -->
+        <div class="drag-handle" cdkDragHandle>
+          <div class="drag-line"></div>
+          <div class="drag-line"></div>
+          <div class="drag-line"></div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- Description -->
+  <div class="description">
+    <p>You can toggle the visibility of each section, as well as reorder their arrangement for your Home View.</p>
+  </div>
+  
+  <!-- Bottom Buttons -->
+  <div class="bottom-buttons">
+    <button class="circle-button" (click)="onBackClick()">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    
+    <button class="circle-button" (click)="onSaveClick()">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M5 13l4 4L19 7"></path>
+      </svg>
+    </button>
+  </div>
+</div>
