@@ -1,7 +1,7 @@
 <!-- home-dialog-home-view.component.html -->
 <div class="villa-container">
   <div>
-    <a class="reorder-section" [routerLink]="'sections'">
+    <a class="reorder-section" (click)="navigateTo('settings/sections')">
       <div class="reorder-left">
         <div class="reorder-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -43,14 +43,14 @@
           </div>
         </div>
 
-        <a class="people-item add-member" (click)="navigateTo('settings/people', $event)">
+        <a class="people-item add-member" (click)="navigateTo('settings/form')">
           <div class="add-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" />
               <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" />
             </svg>
           </div>
-          <span class="add-text">Show Member</span>
+          <span class="add-text">Add Member</span>
           <div class="chevron-right">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <polyline points="9,18 15,12 9,6" stroke="currentColor" stroke-width="2" fill="none" />

@@ -1,4 +1,3 @@
-// custom-hash-location-strategy.ts
 import { HashLocationStrategy, PlatformLocation } from '@angular/common';
 import { Injectable } from '@angular/core';
 
