@@ -1,11 +1,9 @@
 <!-- app.component.html -->
 <div class="container">
-  <!-- Header -->
   <div class="header">
     <h1>SHOW / HIDE & REORDER SECTIONS</h1>
   </div>
   
-  <!-- Room List Container -->
   <div class="room-list">
     <div class="room-container" 
          cdkDropList 
@@ -55,24 +53,4 @@
     <p>You can toggle the visibility of each section, as well as reorder their arrangement for your Home View.</p>
   </div>
   
-  <!-- Bottom Buttons -->
-  <div class="bottom-buttons">
-    <button class="circle-button" (click)="onBackClick()">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" 
-              stroke-linejoin="round" 
-              stroke-width="2" 
-              d="M15 19l-7-7 7-7"></path>
-      </svg>
-    </button>
-    
-    <button class="circle-button" (click)="onSaveClick()">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" 
-              stroke-linejoin="round" 
-              stroke-width="2" 
-              d="M5 13l4 4L19 7"></path>
-      </svg>
-    </button>
-  </div>
 </div>

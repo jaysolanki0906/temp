@@ -1,51 +1,36 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { NavigationEnd, Router } from '@angular/router';
-import { HomeDialogComponent } from '../home-dialog/home-dialog.component';
-import { filter } from 'rxjs';
+// home-dialog-home-view.component.ts
+import { Component, OnInit } from '@angular/core';
+import { DialogService } from '../../dialog.service';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home-dialog-home-view',
-  imports:[CommonModule],
+  standalone: true,
+  imports: [CommonModule,RouterModule],
   templateUrl: './home-dialog-home-view.component.html',
-  styleUrl: './home-dialog-home-view.component.scss'
+  styleUrls: ['./home-dialog-home-view.component.scss']
 })
-export class HomeDialogHomeViewComponent {
-    isHideShowRoute='Home';
-     members: any[] = [
-    { name: 'Aman Jambugheda', role: 'You (Owner)', isOwner: true },
-    { name: 'Yashashwi', role: 'Member' },
-    { name: 'Kabir', role: 'Member' }
+export class HomeDialogHomeViewComponent implements OnInit{
+  ngOnInit(): void {
+      console.log("home dilaog home view");
+  }
+  members = [
+    { id: '1', name: 'John Doe', role: 'Admin', isOwner: false },
+    { id: '2', name: 'Jane Smith', role: 'Owner', isOwner: true },
+    { id: '3', name: 'Bob Johnson', role: 'Member', isOwner: false }
   ];
 
   constructor(
+    private dialogService: DialogService,
     private router: Router,
-    public dialogRef: MatDialogRef<HomeDialogComponent>
-  ) {
-     this.router.events.pipe(filter(e => e instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        this.isHideShowRoute = event.url.includes('home/hideshow');
-        if(this.isHideShowRoute)
-        {
-          this.isHideShowRoute='hideshow';
-        }
-      });
-  }
-  dataPassFunc(event:any)
-  {
-    console.log(event);
-     this.router.navigate(['home/people'],{ state: { myData: event } }); 
-  }
+    private route: ActivatedRoute
+  ) {}
 
-  goToReorder() {
-    this.router.events.pipe(filter(e => e instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        this.isHideShowRoute = event.url.includes('home/hideshow');
-        console.log(this.isHideShowRoute);
-      });
-  this.router.navigate(['home/hideshow'],{ state: { myData: { name: 'Jay', age: 24 } } }); 
-
+  navigateTo(hash: string, event?: Event) {
+    event?.preventDefault();
+    this.dialogService.setHash(hash);
+    const routePath = hash.startsWith('settings/') ? hash.replace('settings/', '') : hash;
+    this.router.navigate([routePath], { relativeTo: this.route });
   }
-
 }

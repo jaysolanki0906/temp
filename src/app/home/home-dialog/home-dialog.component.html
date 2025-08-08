@@ -1,2 +1,17 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<!-- home-dialog.component.html -->
+<div class="max-h-screen overflow-y-auto">
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <div class="bottom-buttons" *ngIf="showFooter">
+    <a class="circle-button" routerLink="settings">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </a>
+    <button class="circle-button" (click)="onSaveClick()">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+    </button>
+  </div>
+</div>

@@ -1,18 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-hide-show',
-  standalone:true,
-  imports:[CommonModule],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './hide-show.component.html',
   styleUrl: './hide-show.component.scss'
 })
-export class HideShowComponent  {
-  constructor(private route:Router){
-   
-  }
+export class HideShowComponent implements OnInit {
+  showFooter: any;
+
+  constructor(private route: Router, private activatedRoute: ActivatedRoute) {}
+
   roomSections: any[] = [
     { id: '1', name: 'Scenes', isVisible: true },
     { id: '2', name: 'Entrance', isVisible: true },
@@ -25,22 +27,28 @@ export class HideShowComponent  {
     { id: '9', name: 'Unassigned Devices', isVisible: true }
   ];
 
+  getDeepestChild(route: ActivatedRoute): ActivatedRoute {
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+    return route;
+  }
+
+  ngOnInit(): void {
+    this.route.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        const currentRoute = this.getDeepestChild(this.activatedRoute);
+        const data = currentRoute.snapshot.data;
+
+        this.showFooter = data['footer'] ?? false;
+        console.log("this.showFooter",this.showFooter);
+      });
+  }
+
   toggleRoomVisibility(room: any): void {
     room.isVisible = !room.isVisible;
   }
 
-  onDrop(event:any): void {
-    
-  }
-
-  onBackClick(): void {
-    this.route.navigate(['./home']);
-  }
-
-  onSaveClick(): void {
-    console.log('Save button clicked');
-    console.log('Current room configuration:', this.roomSections);
-    // Add save logic here
-  }
-
+  onDrop(event: any): void {}
 }

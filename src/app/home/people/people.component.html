@@ -1,3 +1,4 @@
+<!-- people.component.html -->
 <div class="profile-container">
   <div class="profile-card">
     <div class="avatar-section">
@@ -9,23 +10,16 @@
       </div>
     </div>
 
-    <!-- Name and Title -->
     <div class="profile-info">
-      <h1 class="name">Aman Jambughoda</h1>
-      <p class="title">Yay (Owner)</p>
+      <h1 class="name">{{ memberType }}</h1>
+      <p class="title">Yay ({{ memberType }})</p>
     </div>
 
-    <!-- Form Fields -->
     <div class="form-section">
       <div class="input-group">
         <label class="input-label">Member Type</label>
         <div class="input-container">
-          <input
-            type="text"
-            [(ngModel)]="memberType"
-            class="form-input"
-            readonly
-          />
+          <input type="text" [(ngModel)]="memberType" class="form-input" readonly />
         </div>
       </div>
 
@@ -37,18 +31,10 @@
       </div>
     </div>
 
-    <!-- Bottom Icon -->
-    <div class="bottom-section" (click)="homeNavigation()">
+    <div class="bottom-section" (click)="homeNavigation($event)">
       <div class="info-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <circle
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="white"
-            stroke-width="2"
-            opacity="0.6"
-          />
+          <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" opacity="0.6" />
           <path d="M12 16v-4" stroke="white" stroke-width="2" opacity="0.6" />
           <path d="M12 8h.01" stroke="white" stroke-width="2" opacity="0.6" />
         </svg>
